@@ -6,7 +6,6 @@
 ![python
 %>%= 3.7](https://img.shields.io/badge/python->%3D3.7-blue.svg?style=flat)
 
-[![PyPI Version][pypi-image]][pypi-url]
 [![Build Status][build-image]][build-url]
 [![Code Coverage][coverage-image]][coverage-url]
 [![Code Quality][quality-image]][quality-url]
