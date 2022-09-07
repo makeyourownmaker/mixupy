@@ -4,13 +4,13 @@ on: push
 
 jobs:
     build:
-        runs-on: ubuntu-latest
+        runs-on: linux
         strategy:
             matrix:
-                python-version: [3.7, 3.8, 3.9]
+                python-version: [3.7.0, 3.8.0, 3.9.0]
 
         env:
-            USING_COVERAGE: "3.9"
+            USING_COVERAGE: "3.8.0"
 
         steps:
             - name: Checkout sources
@@ -19,7 +19,7 @@ jobs:
             - name: Set up Python
               uses: actions/setup-python@v2
               with:
-                  python-version: $
+                  python-version: 3.8.0
 
             - name: Install dependencies
               run: |
