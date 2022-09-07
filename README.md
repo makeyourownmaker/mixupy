@@ -1,6 +1,7 @@
 
 # mixupy
 
+[![PyPI Version][pypi-image]][pypi-url]
 [![Build Status][build-image]][build-url]
 [![Code Coverage][coverage-image]][coverage-url]
 [![Code Quality][quality-image]][quality-url]
@@ -44,7 +45,7 @@ help(mixup)
 pip install mixupy
 ```
 
-Requires python version 3.7 or higher plus pandas and numpy
+Requires python 3.7 or higher plus pandas and numpy
 
 ```python
 pip install numpy pandas
@@ -186,6 +187,8 @@ Pull requests are welcome.  For major changes, please open an issue first to dis
 
 <!-- Badges -->
 
+[pypi-image]: https://img.shields.io/pypi/v/mixupy
+[pypi-url]: https://pypi.org/project/mixupy/
 [build-image]: https://github.com/makeyourownmaker/mixupy/actions/workflows/build.yml/badge.svg
 [build-url]: https://github.com/makeyourownmaker/mixupy/actions/workflows/build.yml
 [coverage-image]: https://codecov.io/gh/makeyourownmaker/mixupy/branch/main/graph/badge.svg
