@@ -45,7 +45,7 @@ help(mixup)
 pip install mixupy
 ```
 
-Requires python version 3.7 and higher plus pandas and numpy
+Requires python version 3.7 or higher plus pandas and numpy
 
 ```python
 pip install numpy pandas
