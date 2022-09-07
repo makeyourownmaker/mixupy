@@ -1,11 +1,6 @@
 
 # mixupy
 
-![Lifecycle
-](https://img.shields.io/badge/lifecycle-experimental-orange.svg?style=flat)
-![python
-%>%= 3.7](https://img.shields.io/badge/python->%3D3.7-blue.svg?style=flat)
-
 [![Build Status][build-image]][build-url]
 [![Code Coverage][coverage-image]][coverage-url]
 [![Code Quality][quality-image]][quality-url]
