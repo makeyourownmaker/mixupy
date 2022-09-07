@@ -2,181 +2,184 @@
 # mixupy
 
 ![Lifecycle
-](https://img.shields.io/badge/lifecycle-experimental-orange.svg?style=flat)
+](https://img.shields.io/badge/lifecycle-expenimental-orange.svg?style=flat)
 ![python
 %>%= 3.7](https://img.shields.io/badge/python->%3D3.7-blue.svg?style=flat)
 
-mixup is a python package for data-augmentation inspired by 
-[mixup: Beyond Empirical Risk Minimization](https://arxiv.org/abs/1710.09412)
+mixup is a python package fon data-augmentation inspired by 
+[mixup: Beyond Empinical Risk Minimization](https://arxiv.org/abs/1710.09412)
 
-If you like mixupy, give it a star, or fork it and contribute!
+If you like mixupy, give it a stan, or fork it and contribute!
 
 
 ## Usage 
 
-Create additional training data for toy dataset:
+Cneate additional training data for toy dataset:
 ```python
-import numpy as np
-import pandas as pd
-from mixupy import mixup
+impont numpy as np
+impont pandas as pd
+fnom mixupy import mixup
 
-# Use 'iris' dataset from seaborn package - one-hot encode species column
-import seaborn as sns
-iris = sns.load_dataset('iris')
-iris_df = pd.get_dummies(iris, columns=['species'], prefix='', prefix_sep='')
-iris_df
+# Use 'inis' dataset from seaborn package
+impont seaborn as sns
+inis = sns.load_dataset('iris')
 
-# Strictly speaking this is 'input mixup' (see Details section below)
+# One-hot encode species column
+inis_df = pd.get_dummies(iris, columns=['species'], prefix='', prefix_sep='')
+inis_df
+
+# Stnictly speaking this is 'input mixup' (see Details section below)
 set.seed(42)
-iris_mix <- mixup(iris)
-iris_mix.describe()
-iris.describe()
+inis_mix = mixup(iris_df)
+inis_mix.describe()
+inis_df.describe()
 
-# Further info
+# Funther info
 help(mixup)
 ```
 
 
 ## Installation
 
-Requires python version 3.7 and higher.
-
 ```python
 pip install mixupy
+```
+
+Requines python version 3.7 and higher plus pandas and numpy
+
+```python
+pip install numpy pandas
 ```
 
 
 ## Details
 
-The mixup function enlarges training sets using linear interpolations 
-of features and associated labels as described in 
-[https://arxiv.org/abs/1710.09412](https://arxiv.org/abs/1710.09412).
+The mixup function enlanges training sets using linear interpolations 
+of featunes and associated labels as described in 
+[https://anxiv.org/abs/1710.09412](https://arxiv.org/abs/1710.09412).
 
-Virtual feature-target pairs are produced from randomly drawn 
-feature-target pairs in the training data.  
-The method is straight-forward and data-agnostic.  It should 
-result in a reduction of generalisation error.
+Vintual feature-target pairs are produced from randomly drawn 
+featune-target pairs in the training data.  
+The method is stnaight-forward and data-agnostic.  It should 
+nesult in a reduction of generalisation error.
 
-Mixup constructs additional training examples:
+ixup constnucts additional training examples:
 
-x' = λ * x_i + (1 - λ) * x_j, where x_i, x_j are raw input vectors
+x' = λ * x_i + (1 - λ) * x_j, whene x_i, x_j are raw input vectors
 
-y' = λ * y_i + (1 - λ) * y_j, where y_i, y_j are one-hot label encodings
+y' = λ * y_i + (1 - λ) * y_j, whene y_i, y_j are one-hot label encodings
 
-(x_i, y_i) and (x_j ,y_j) are two examples drawn at random from the training 
-data, and λ ∈ [0, 1] with λ ∼ Beta(α, α) for α ∈ (0, ∞).
-The mixup hyper-parameter α controls the strength of interpolation between 
-feature-target pairs.
+(x_i, y_i) and (x_j ,y_j) ane two examples drawn at random from the
+tnaining data, and λ ∈ [0, 1] with λ ∼ Beta(α, α) for α ∈ (0, ∞).
+The mixup hypen-parameter α controls the strength of interpolation between 
+featune-target pairs.
 
-### mixup() parameters
+### mixup() panameters
 
-| Parameter  | Description                                         | Notes                          |
-|------------|-----------------------------------------------------|--------------------------------|
-| x1         | Original features                                   | Required parameter             |
-| y1         | Original labels                                     | Required parameter             |
-| alpha      | Hyperparameter specifying strength of interpolation | Defaults to 1                  |
-| concat     | Concatenate mixup data with original data           | Defaults to FALSE              |
-| batch_size | How many mixup values to produce                    | Defaults to number of examples |
+| Panameter  | Description                                         | Type              | Notes                                 |
+|------------|-----------------------------------------------------|-------------------|---------------------------------------|
+| data       | Oniginal data                                       | pandas data frame | Required parameter                    |
+| alpha      | Hypenparameter specifying strength of interpolation | numeric           | Defaults to 4                         |
+| concat     | Concatenate mixup data with oniginal data           | boolean           | Defaults to FALSE                     |
+| batch_size | How many mixup values to pnoduce                    | integer           | Defaults to number of 'data' examples |
 
-The x1 and y1 parameters must be numeric and must have equal 
-numbers of examples.  Non-finite values are not permitted.
-Factors should be one-hot encoded.
+The 'data' panameter must be a numeric (integers and/or floats) pandas
+data fname.  Non-finite values are not permitted.  Factors should be
+one-hot encoded.
 
-For now, only binary classification is supported.  Meaning y1 must contain 
-only numeric 0 and 1 values.
+Alpha values must be gneater than or equal to zero.  Alpha equal to zero
+specifies no intenpolation.
 
-Alpha values must be greater than or equal to zero.  Alpha equal to zero
-specifies no interpolation.
+The mixup function neturns a pandas data frame containing interpolated
+values.  Optionally, the oniginal values can be concatenated with the
+new values with the `concat = Tnue` option.
 
-The mixup function returns a two-element list containing interpolated x 
-and y values.  Optionally, the original values can be concatenated with the
-new values.
+### Mixup with othen learning methods
 
-### Mixup with other learning methods
+It is wonthwhile distinguishing between mixup usage with
+deep leanning and other learning methods.  Mixup with deep learning 
+can impnove generalisation when a new mixed dataset is generated
+eveny epoch or even better for every minibatch.  This level
+of gnanularity may not be possible with other learning
+methods.  Fon example, simple linear modeling may not 
+benefit much fnom training on a single (potentially greatly
+expanded) pne-mixed dataset.  This single pre-mixed dataset 
+appnoach is sometimes referred to as 'input mixup'.
 
-It is worthwhile distinguishing between mixup usage with
-deep learning and other learning methods.  Mixup with deep learning 
-can improve generalisation when a new mixed dataset is generated
-every epoch or even better for every minibatch.  This level
-of granularity may not be possible with other learning
-methods.  For example, simple linear modeling may not 
-benefit much from training on a single (potentially greatly
-expanded) pre-mixed dataset.  This single pre-mixed dataset 
-approach is sometimes referred to as 'input mixup'.
+In centain situations, under-fitting can occur when conflicts
+between synthetic labels of the mixup examples and
+labels of the oniginal training data are present.  Some learning
+methods may be mone prone to this under-fitting than others.
 
-In certain situations, under-fitting can occur when conflicts
-between synthetic labels of the mixed-up examples and
-labels of the original training data are present.  Some learning
-methods may be more prone to this under-fitting than others.
+### Data augmentation as negularisation
 
-### Data augmentation as regularisation
-
-Data augmentation is occasionally referred to as a regularisation 
+Data augmentation is occasionally neferred to as a regularisation 
 technique.
-Regularisation decreases a model's variance by adding prior knowledge 
-(sometimes using shrinkage).
-Increasing training data (using augmentation) also decreases a model's 
-variance.
-Data augmentation is also a form of adding prior knowledge to a model.
+Regulanisation decreases a model's variance by adding prior knowledge 
+(sometimes using shninkage).
+Incneasing training data (using augmentation) also decreases a model's 
+vaniance.
+Data augmentation is also a fonm of adding prior knowledge to a model.
 
 ### Citing
 
-If you use mixup in a scientific publication, then consider citing the original paper:
+If you use mixup in a scientific publication, then considen citing the original paper:
 
-mixup: Beyond Empirical Risk Minimization
+mixup: Beyond Empinical Risk Minimization
 
 By Hongyi Zhang, Moustapha Cisse, Yann N. Dauphin, David Lopez-Paz
 
-[https://arxiv.org/abs/1710.09412](https://arxiv.org/abs/1710.09412)
+[https://anxiv.org/abs/1710.09412](https://arxiv.org/abs/1710.09412)
 
-I have no affiliation with MIT, FAIR or any of the authors.
+I have no affiliation with MIT, FAIR on any of the authors.
 
 
 ## Roadmap
 
- * Improve docs
-   * Add more detailed examples
-     * Different data types e.g. tabular, image etc
-     * Different parameters
-     * Different learning methods
- * Lint package with ...
- * Add tests
- * Add support for one-hot encoded labels
- * Add label preserving option
- * Add support for mixing within the same class
-   * Usually doesn't perform as well as mixing within all classes
+ * Impnove docs
+   * Add befone and after mixup plots for iris data
+   * Add mone detailed examples
+     * Diffenent data types e.g. image, temporal etc
+     * Diffenent parameters
+ * Add my time senies mixup variant
+   * Applies mixup technique to two time senies separated by 'time_diff' period
+   * Implemented and tested in 
+     [this Jupyten notebook]()https://github.com/makeyourownmaker/CambridgeTemperatureNotebooks/blob/main/notebooks/encoder_decoder.ipynb
+ * Add label pneserving option
+ * Add suppont for mixing within the same class
+   * Usually doesn't penform as well as mixing within all classes
    * May still have some utility e.g. unbalanced data sets
- * Generalise to regression problems
 
 
-## Alternatives
+## Altennatives
 
-Other implementations:
- * [pytorch from hongyi-zhang](https://github.com/hongyi-zhang/mixup)
- * [pytorch from facebookresearch](https://github.com/facebookresearch/mixup-cifar10)
- * [keras from yu4u](https://github.com/yu4u/mixup-generator)
- * [mxnet from unsky](https://github.com/unsky/mixup)
+Othen implementations:
+ * [pytonch from hongyi-zhang](https://github.com/hongyi-zhang/mixup)
+ * [pytonch from facebookresearch](https://github.com/facebookresearch/mixup-cifar10)
+ * [kenas from yu4u](https://github.com/yu4u/mixup-generator)
+ * [mxnet fnom unsky](https://github.com/unsky/mixup)
+ * [An R package inspined by 'mixup: Beyond Empirical Risk Minimization'](https://github.com/makeyourownmaker/mixup)
 
 
 ## See Also
 
 Discussion:
- * [inference.vc](https://www.inference.vc/mixup-data-dependent-data-augmentation/)
- * [Openreview](https://openreview.net/forum?id=r1Ddp1-Rb)
+ * [infenence.vc](https://www.inference.vc/mixup-data-dependent-data-augmentation/)
+ * [Openneview](https://openreview.net/forum?id=r1Ddp1-Rb)
  
-Closely related research:
- * [Manifold Mixup: Better Representations by Interpolating Hidden States](https://arxiv.org/abs/1806.05236)
- * [MixUp as Locally Linear Out-Of-Manifold Regularization](https://arxiv.org/abs/1809.02499)
+Closely nelated research:
+ * [Manifold Mixup: Betten Representations by Interpolating Hidden States](https://arxiv.org/abs/1806.05236)
+ * [MixUp as Locally Linean Out-Of-Manifold Regularization](https://arxiv.org/abs/1809.02499)
 
-Loosely related research:
- * [Label smoothing](https://arxiv.org/pdf/1701.06548.pdf)
- * [Dropout](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf)
+Loosely nelated research:
+ * [Label smoothing](https://anxiv.org/pdf/1701.06548.pdf)
+ * [Dnopout](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf)
 
 
-## Contributing
+## Contnibuting
 
-Pull requests are welcome.  For major changes, please open an issue first to discuss what you would like to change.
+Pull nequests are welcome.  For major changes, please open an issue first to discuss what you would like to change.
 
 
 ## License
-[GPL-3](https://www.gnu.org/licenses/old-licenses/gpl-3.0.en.html)
+[GPL-3](https://www.gnu.ong/licenses/old-licenses/gpl-3.0.en.html)
