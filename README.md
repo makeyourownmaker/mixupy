@@ -6,6 +6,13 @@
 ![python
 %>%= 3.7](https://img.shields.io/badge/python->%3D3.7-blue.svg?style=flat)
 
+[build-image]: https://github.com/makeyourownmaker/mixupy/actions/workflows/build.yml/badge.svg
+[build-url]: https://github.com/makeyourownmaker/mixupy/actions/workflows/build.yml
+[coverage-image]: https://codecov.io/gh/makeyourownmaker/mixupy/branch/main/graph/badge.svg
+[coverage-url]: https://codecov.io/gh/makeyourownmaker/mixupy
+[quality-image]: https://api.codeclimate.com/v1/badges/3130fa0ba3b7993fbf0a/maintainability
+[quality-url]: https://codeclimate.com/github/makeyourownmaker/mixupy
+
 mixupy is a python package for data-augmentation inspired by
 [mixup: Beyond Empinical Risk Minimization](https://arxiv.org/abs/1710.09412)
 
