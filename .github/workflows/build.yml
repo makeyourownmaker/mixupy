@@ -4,7 +4,7 @@ on: push
 
 jobs:
     build:
-        runs-on: linux
+        runs-on: ubuntu-latest
         strategy:
             matrix:
                 python-version: [3.7.0, 3.8.0, 3.9.0]
