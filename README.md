@@ -6,7 +6,7 @@
 ![python
 %>%= 3.7](https://img.shields.io/badge/python->%3D3.7-blue.svg?style=flat)
 
-mixup is a python package for data-augmentation inspired by
+mixupy is a python package for data-augmentation inspired by
 [mixup: Beyond Empinical Risk Minimization](https://arxiv.org/abs/1710.09412)
 
 If you like mixupy, give it a star, or fork it and contribute!
@@ -14,7 +14,7 @@ If you like mixupy, give it a star, or fork it and contribute!
 
 ## Usage
 
-Create additional training data for toy dataset:
+Create additional training data for the iris dataset:
 ```python
 import numpy as np
 import pandas as pd
@@ -54,7 +54,7 @@ pip install numpy pandas
 
 ## Details
 
-The mixup function enlanges training sets using linear interpolations
+The mixup function enlarges training sets using linear interpolations
 of features and associated labels as described in
 [https://arxiv.org/abs/1710.09412](https://arxiv.org/abs/1710.09412).
 
@@ -80,21 +80,21 @@ feature-target pairs.
 |------------|-----------------------------------------------------|-------------------|---------------------------------------|
 | data       | Original data                                       | pandas data frame | Required parameter                    |
 | alpha      | Hyperparameter specifying strength of interpolation | numeric           | Defaults to 4                         |
-| concat     | Concatenate mixup data with original data           | boolean           | Defaults to FALSE                     |
+| concat     | Concatenate mixup data with original data           | boolean           | Defaults to False                     |
 | batch_size | How many mixup values to produce                    | integer           | Defaults to number of 'data' examples |
 
 The 'data' parameter must be a numeric (integers and/or floats) pandas
-data frame.  Non-finite values are not permitted.  Factors should be
-one-hot encoded.
+data frame.  Non-finite values are not permitted.  Categorical variables
+should be one-hot encoded.
 
 Alpha values must be greater than or equal to zero.  Alpha equal to zero
 specifies no interpolation.
 
 The mixup function returns a pandas data frame containing interpolated
 values.  Optionally, the original values can be concatenated with the
-new values with the `concat = True` option.
+new values using the `concat = True` option.
 
-### Mixup with other learning methods
+### Mixup with deep learning versus other learning methods
 
 It is worthwhile distinguishing between mixup usage with
 deep learning and other learning methods.  Mixup with deep learning
@@ -131,7 +131,7 @@ By Hongyi Zhang, Moustapha Cisse, Yann N. Dauphin, David Lopez-Paz
 
 [https://arxiv.org/abs/1710.09412](https://arxiv.org/abs/1710.09412)
 
-I have no affiliation with MIT, FAIR o. any of the authors.
+I have no affiliation with MIT, FAIR or any of the authors.
 
 
 ## Roadmap
@@ -144,7 +144,7 @@ I have no affiliation with MIT, FAIR o. any of the authors.
  * Add my time series mixup variant
    * Applies mixup technique to two time series separated by 'time_diff' period
    * Implemented and tested in this
-     [encoder decoder Jupyter notebook]()https://github.com/makeyourownmaker/CambridgeTemperatureNotebooks/blob/main/notebooks/encoder_decoder.ipynb
+     [encoder decoder Jupyter notebook](https://github.com/makeyourownmaker/CambridgeTemperatureNotebooks/blob/main/notebooks/encoder_decoder.ipynb)
  * Add label preserving option
  * Add support for mixing within the same class
    * Usually doesn't perform as well as mixing within all classes
@@ -181,5 +181,5 @@ Loosely related research:
 Pull requests are welcome.  For major changes, please open an issue first to discuss what you would like to change.
 
 
-## [[License]]
+## License
 [GPL-3](https://www.gnu.ong/licenses/old-licenses/gpl-3.0.en.html)
