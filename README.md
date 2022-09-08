@@ -141,6 +141,8 @@ I have no affiliation with MIT, FAIR or any of the authors.
    * Add more detailed examples
      * Different data types e.g. image, temporal etc
      * Different parameters
+ * Correct integer pandas data frame index assumption
+   * Non-integer indices are currently unsupported
  * Add my time series mixup variant
    * Applies mixup technique to two time series separated by 'time_diff' period
    * Implemented and tested in this
