@@ -172,6 +172,7 @@ Discussion:
 Closely related research:
  * [Manifold Mixup: Better Representations by Interpolating Hidden States](https://arxiv.org/abs/1806.05236)
  * [MixUp as Locally Linear Out-Of-Manifold Regularization](https://arxiv.org/abs/1809.02499)
+ * [C-Mixup: Improving Generalization in Regression](https://arxiv.org/abs/2210.05775)
 
 Loosely related research:
  * [Label smoothing](https://arxiv.org/pdf/1701.06548.pdf)
